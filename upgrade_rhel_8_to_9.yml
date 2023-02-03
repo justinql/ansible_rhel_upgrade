@@ -1,0 +1,21 @@
+- hosts: rhel
+  var:
+    current_version: 8.7
+    target_version: 9.0
+  tasks:
+    - name: Prepare RHEL for upgrade
+      include_role:
+        name: prepare_rhel_upgrade
+
+          #    - name: Answer pre-upgrade questions
+          #      ansible.builtin.file:
+          #        src: answerfile.userchoices
+          #        dest: /var/log/leapp/answerfile.userchoices
+          #        owner: root
+          #        group: root
+          #        mode: '0644'
+          #      creates: /var/log/leapp/answerfile.userchoices
+          #      become: true
+          #
+    - name: Preform RHEL upgrade
+      role: rhel_upgrade

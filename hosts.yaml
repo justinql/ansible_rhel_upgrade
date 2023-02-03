@@ -1,0 +1,5 @@
+all:
+  children:
+    rhel:
+      hosts:
+        172.16.102.135

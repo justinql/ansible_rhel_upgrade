@@ -1,5 +1,5 @@
 ---
-# defaults file for rhel-upgrade
+# tasks file for rhel-upgrade
 - name: Pre-check for RHEL upgrade
   ansible.builtin.shell: leapp preupgrade --target {{ target_version }}
 

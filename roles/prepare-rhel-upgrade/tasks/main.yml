@@ -1,5 +1,5 @@
 ---
-# defaults file for prepare-rhel-upgrade
+# tasks file for prepare-rhel-upgrade
 
 - name: Remove the /root/tmp_leapp_py3 directory if it is present 
   ansible.builtin.file:
@@ -25,7 +25,7 @@
   #Ends:           02/01/2024
 
 - name: Add required repositories
-  ansible.builtin.shell: subscription-manager repos --enable {{ repo }}
+  ansible.builtin.shell: subscription-manager repos --enable {{ item }}
   loop: "{{ required_repos}}"
 
 - name: Lock RHEL to latest minor release
@@ -40,3 +40,7 @@
 - name: Reboot (this may take several minutes)
   ansible.builtin.reboot:
     reboot_timeout: 600
+
+- name: Install Leapp
+  ansible.builtin.dnf:
+    name: leapp-upgrade

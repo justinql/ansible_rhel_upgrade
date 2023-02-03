@@ -3,9 +3,8 @@
 
 - name: Install missing applications
   ansible.builtin.dnf:
-    name: {{ item }}
+    name: "{{ missing_apps }}"
     state: present
-  loops: "{{ missing_apps }}"
 
 - name: Disable Root Login
   ansible.builtin.lineinfile:
@@ -19,13 +18,17 @@
     regexp: '^AllowZoneDrifting='
     line: AllowZoneDrifting=no
 
+- name: ensures /var/log/leapp/ dir exists
+  file: 
+    path: /var/log/leapp
+    state: directory
+
 - name: Answer pre-upgrade questions
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: answerfile.userchoices
     dest: /var/log/leapp/answerfile.userchoices
     owner: root
     group: root
     mode: '0644'
-  creates: /var/log/leapp/answerfile.userchoices
   become: true
 

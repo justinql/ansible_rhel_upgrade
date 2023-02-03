@@ -1,11 +1,14 @@
 - hosts: rhel
-  var:
+  vars:
     current_version: 8.7
     target_version: 9.0
   tasks:
     - name: Prepare RHEL for upgrade
       include_role:
-        name: prepare_rhel_upgrade
+        name: prepare-rhel-upgrade
+    - name: Changes for our demo env
+      include_role:
+        name: demo-prepare-rhel-upgrade
 
           #    - name: Answer pre-upgrade questions
           #      ansible.builtin.file:
@@ -18,4 +21,5 @@
           #      become: true
           #
     - name: Preform RHEL upgrade
-      role: rhel_upgrade
+      include_role:
+        name: rhel-upgrade

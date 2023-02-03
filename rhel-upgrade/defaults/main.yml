@@ -5,3 +5,9 @@
 
 - name: Preform RHEL upgrade
   ansible.builtin.shell: leapp upgrade --target {{ target_version }}
+
+- name: Reboot (this may take several minutes)
+  ansible.builtin.reboot:
+    reboot_timeout: 600
+
+  

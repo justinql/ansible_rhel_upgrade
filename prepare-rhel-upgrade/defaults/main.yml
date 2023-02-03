@@ -37,4 +37,6 @@
 - name: Update RHEL to latest minor release
   ansible.builtin.shell: dnf update
 
-# TODO Reboot if required
+- name: Reboot (this may take several minutes)
+  ansible.builtin.reboot:
+    reboot_timeout: 600
